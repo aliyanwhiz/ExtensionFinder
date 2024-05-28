@@ -1128,7 +1128,14 @@ function findExtension() {
     const tbody = document.querySelector('.body');
     tbody.innerHTML = '';
 
-    const filteredExtensions = extensions.filter(extension => extension.extension === inputVal);
+    //const filteredExtensions = extensions.filter(extension => extension.extension === inputVal);
+    var pattern = new RegExp("\\b"+inputVal+"[0-9]*","gm"); 
+    const filteredExtensions = extensions.filter(ext => pattern.test(ext["extension"]));
+
+    filteredExtensions.sort( (a, b) => {
+        return a.extension - b.extension;
+    })
+
     filteredExtensions.forEach((extension, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
