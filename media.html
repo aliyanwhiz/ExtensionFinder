@@ -42,6 +42,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+    const searchBox = document.getElementById('extNum');
+    if (searchBox) {
+        searchBox.focus();
+    }
+    });
     const extensions = [
     {
         "id": "1",
@@ -877,7 +883,7 @@
         "id": "139",
         "extension": "190",
         "department": "Software",
-        "name": "Mr. Umair /Umer / Shariq"
+        "name": "Mr. Umer / Shariq / Hamza / Aliyan"
     },
     {
         "id": "140",
@@ -1105,7 +1111,7 @@
         "id": "177",
         "extension": "524",
         "department": "Store",
-        "name": "Salmin"
+        "name": "Salman"
     }
 ];
 
