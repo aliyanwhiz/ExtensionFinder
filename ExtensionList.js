@@ -162,7 +162,7 @@ const data = [
     { "id": "162", "extension": "177", "department": "Yarn", "name": "Mr. Shoaib / Faizan" },
     { "id": "163", "extension": "158", "department": "Yarn P.A", "name": "Mr. Shahzad" },
     { "id": "164", "extension": "258", "department": "Yarn", "name": "Mr. Qadir" },
-    { "id": "165", "extension": "139", "department": "Yarn Godown", "name": "Mr. Imdad Soomro" },
+    { "id": "165", "extension": "139", "department": "Yarn Godown", "name": "Mr. Haseeb" },
     { "id": "166", "extension": "239", "department": "Yarn (Office)", "name": "Mr. Noor" },
     { "id": "167", "extension": "339", "department": "Yarn Wastage Area", "name": "Mr. Somroo" },
     { "id": "168", "extension": "320", "department": "Packing Room", "name": "Mr. Shoaib / Rashid" },
@@ -174,6 +174,7 @@ const data = [
     { "id": "174", "extension": "556", "department": "Marketing", "name": "Mr. Abdul Khaliq" },
     { "id": "175", "extension": "565", "department": "Marketing", "name": "Ali Raza" },
     { "id": "176", "extension": "480", "department": "Electrical", "name": "Faisal" },
-    { "id": "177", "extension": "524", "department": "Store", "name": "Salmin" }
+    { "id": "177", "extension": "524", "department": "Store", "name": "Salmin" },
+    { "id": "178", "extension": "303", "department": "I.T", "name": "Anas Grami" }
 ];
 

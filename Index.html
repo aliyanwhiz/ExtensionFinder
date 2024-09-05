@@ -13,7 +13,7 @@
             <div class="container text-center">
                 <h1 class="display-1">Extension Person Finder</h1>
                 <p class="h6">Find the caller by the extension number</p>
-                <input class="form-control text-danger" id="myInput" type="text" placeholder="Search..">
+                <input class="form-control fw-bold" id="myInput" type="text" placeholder="Search..">
             </div>
         </div>
         <table class="table table-striped table-dark" id="dataTable">
@@ -48,8 +48,10 @@
 
             data.forEach(item => {
                 const row = document.createElement('tr');
+                let id = item.id.toString(); 
+                let formattedId = id.padStart(3, '0');
                 row.innerHTML = `
-                    <td>${item.id}</td>
+                    <td>${formattedId}</td>
                     <td>${item.extension}</td>
                     <td>${item.department}</td>
                     <td>${item.name}</td>
