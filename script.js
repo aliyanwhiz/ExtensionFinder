@@ -1,11 +1,11 @@
-[
+const data = [
     { "id": "1", "extension": "103", "department": "Director", "name": "Mr. Aamir Maqbool Sb" },
     { "id": "2", "extension": "104", "department": "Director", "name": "Mr. Harris Siddique Sb" },
     { "id": "3", "extension": "204", "department": "Director", "name": "Mr. Harris Siddique Sb" },
     { "id": "4", "extension": "105", "department": "Director", "name": "Mr. Shiraz Masood Sb" },
     { "id": "5", "extension": "108", "department": "Director", "name": "Mr. Sohaib Sb" },
     { "id": "7", "extension": "117", "department": "Technical Director", "name": "Mr. Arshad Khan" },
-    { "id": "8", "extension": "422", "department": "A/C Chiller", "name": "Mr. Ashfaque Arain" },
+    { "id": "8", "extension": "422", "department": "HR sikandar", "name": "Ms. Tehreem nizaam" },
     { "id": "9", "extension": "211", "department": "A/C Chiller New", "name": "Mr. Abid" },
     { "id": "10", "extension": "279", "department": "Harris Sb P.A", "name": "Mrs. Erum" },
     { "id": "11", "extension": "247", "department": "Accounts", "name": "Mr. Danish" },
@@ -162,7 +162,7 @@
     { "id": "162", "extension": "177", "department": "Yarn", "name": "Mr. Shoaib / Faizan" },
     { "id": "163", "extension": "158", "department": "Yarn P.A", "name": "Mr. Shahzad" },
     { "id": "164", "extension": "258", "department": "Yarn", "name": "Mr. Qadir" },
-    { "id": "165", "extension": "139", "department": "Yarn Godown", "name": "Mr. Imdad Soomro" },
+    { "id": "165", "extension": "139", "department": "Yarn Godown", "name": "Mr. Haseeb" },
     { "id": "166", "extension": "239", "department": "Yarn (Office)", "name": "Mr. Noor" },
     { "id": "167", "extension": "339", "department": "Yarn Wastage Area", "name": "Mr. Somroo" },
     { "id": "168", "extension": "320", "department": "Packing Room", "name": "Mr. Shoaib / Rashid" },
@@ -174,6 +174,40 @@
     { "id": "174", "extension": "556", "department": "Marketing", "name": "Mr. Abdul Khaliq" },
     { "id": "175", "extension": "565", "department": "Marketing", "name": "Ali Raza" },
     { "id": "176", "extension": "480", "department": "Electrical", "name": "Faisal" },
-    { "id": "177", "extension": "524", "department": "Store", "name": "Salmin" }
-]
+    { "id": "177", "extension": "524", "department": "Store", "name": "Salmin" },
+    { "id": "178", "extension": "303", "department": "I.T", "name": "Anas Grami" }
+];
 
+function generateTableRows(data) {
+    const tableBody = document.querySelector('#dataTable tbody');
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        //let formattedId = String(item.id).padStart(3, '0');
+        row.innerHTML = `
+            <td>${item.extension}</td>
+            <td>${item.department}</td>
+            <td>${item.name}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Filter function for search box
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('myInput').addEventListener('keyup', function() {
+        const value = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#dataTable tbody tr');
+
+        rows.forEach(row => {
+            const isVisible = Array.from(row.cells).some(cell => 
+                cell.textContent.toLowerCase().includes(value)
+            );
+            row.style.display = isVisible ? '' : 'none';
+        });
+    });
+
+    // Initial table generation with data
+    generateTableRows(data);
+});

@@ -1,1 +1,0 @@
-### managing indigo extensions
