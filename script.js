@@ -178,13 +178,13 @@ const data = [
     { "id": "178", "extension": "303", "department": "I.T", "name": "Anas Grami" }
 ];
 
+// Function to generate table rows
 function generateTableRows(data) {
     const tableBody = document.querySelector('#dataTable tbody');
     tableBody.innerHTML = ''; // Clear existing rows
 
     data.forEach(item => {
         const row = document.createElement('tr');
-        //let formattedId = String(item.id).padStart(3, '0');
         row.innerHTML = `
             <td>${item.extension}</td>
             <td>${item.department}</td>
@@ -196,6 +196,10 @@ function generateTableRows(data) {
 
 // Filter function for search box
 document.addEventListener('DOMContentLoaded', function () {
+    // Focus the search input when the popup opens
+    document.getElementById('myInput').focus();
+
+    // Set up the search filter
     document.getElementById('myInput').addEventListener('keyup', function() {
         const value = this.value.toLowerCase();
         const rows = document.querySelectorAll('#dataTable tbody tr');
