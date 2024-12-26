@@ -194,6 +194,11 @@ function generateTableRows(data) {
     });
 }
 
+function dataSort(data) {
+    const sortedData = data.sort((a,b) => parseInt(a.extension) - parseInt(b.extension))
+    return sortedData
+}
+
 // Filter function for search box
 document.addEventListener('DOMContentLoaded', function () {
     // Focus the search input when the popup opens
@@ -213,5 +218,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Initial table generation with data
-    generateTableRows(data);
+    generateTableRows(dataSort(data));
 });
