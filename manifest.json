@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Extension Finder",
-    "description":"This is a local system extention used to find extension numbers",
-    "version": "1.0",
+    "name": "Phone Book",
+    "description":"This extension is used to manage company local contact network",
+    "version": "7.0.4",
     "action": {
       "default_popup": "Index.html",
       "default_title": "Extension Person Finder"
