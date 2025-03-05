@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const editModule = document.getElementById("editModule");
     const addModule = document.getElementById("addModule");
     const uploadModule = document.getElementById("uploadModule");
+    const myInput = document.getElementById("myInput");
+
+    const Inputfocus = () => {
+        myInput.focus();
+    };
+
+
+    Inputfocus();
     let currentData = [];
     let selectedItemId = null;
 
@@ -14,12 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (item && typeof item === 'object' && item.extension !== undefined && item.department !== undefined && item.user !== undefined) {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td class="text-center">${item.extension}</td>
-                    <td class="text-center">${item.department}</td>
-                    <td class="text-center">${item.user}</td>
+                    <td><span class="rounded rounded-pill px-2 py-1 bg-dark">${item.extension}</span></td>
+                    <td><span class="rounded rounded-pill px-2 py-1 bg-dark">${item.department}</span></td>
+                    <td><span class="rounded rounded-pill px-2 py-1 bg-dark">${item.user}</span></td>
                     <td class="d-flex">
-                        <button class="edit-btn btn btn-sm bg-none text-warning" data-id="${item.id}"><i class="fa fa-edit"></i></button>
-                        <button class="delete-btn btn btn-sm  bg-none text-danger" data-id="${item.id}"><i class="fa fa-trash"></i></button>
+                        <button class="edit-btn btn btn-sm rounded rounded-circle bg-dark mx-2 text-warning" data-id="${item.id}"><i class="fa fa-edit"></i></button>
+                        <button class="delete-btn btn btn-sm rounded rounded-circle bg-dark mx-2 text-danger" data-id="${item.id}"><i class="fa fa-trash"></i></button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -77,12 +85,12 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch((error) => console.error("Error fetching data:", error));
     }
 
-    document.getElementById("myInput").addEventListener("keyup", function () {
+    myInput.addEventListener("keyup", function () {
         const value = this.value.toLowerCase();
         const filteredData = currentData.filter((item) => {
-            return Object.values(item).some((val) =>
-                String(val).toLowerCase().includes(value)
-            );
+            return Object.entries(item)
+                .filter(([key]) => key !== "id")
+                .some(([, val]) => String(val).toLowerCase().includes(value));
         });
         generateTableRows(filteredData);
     });
@@ -97,12 +105,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document
         .getElementById("editForm")
         .addEventListener("submit", function (event) {
+            debugger
             event.preventDefault();
             const extension = document.getElementById("editExtension").value;
             const department = document.getElementById("editDepartment").value;
             const user = document.getElementById("editUser").value;
 
-            fetch(`http://172.16.200.235:8082/api/data/${selectedItemId}`, {
+            fetch(`http://172.16.200.235:8082/api/data/${selectedItemId}`,
+                {
+                
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -112,7 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     user,
                 }),
             })
-                .then((response) => {
+            .then((response) => {
+                    debugger
                     if (response.ok) {
                         editModule.style.display = "none";
                         fetchData();
@@ -136,16 +148,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const formData = new FormData();
-        formData.append("file", file); // "file" matches the parameter name expected by your API
+        formData.append("file", file);
 
         fetch("http://172.16.200.235:8082/api/excel/upload", {
             method: "POST",
-            body: formData, // Send FormData directly as the body
+            body: formData,
         })
             .then((response) => {
                 if (response.ok) {
                     uploadModule.style.display = "none";
-                    fetchData(); // Assuming fetchData() updates your table
+                    fetchData();
                 } else {
                     alert("Failed to upload file.");
                 }
@@ -188,5 +200,5 @@ document.addEventListener("DOMContentLoaded", function () {
         uploadModule.style.display = "none";
     });
 
-    fetchData(); // Initial data fetch
+    fetchData();
 });
