@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
         myInput.focus();
     };
 
-
     Inputfocus();
+
+
+
     let currentData = [];
     let selectedItemId = null;
 
@@ -134,6 +136,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch((error) => console.error("Error updating data:", error));
         });
+    
+    document.getElementById("downloadButton").addEventListener("click", function () {
+        fetch("http://172.16.200.235:8082/api/excel/generate")
+            .then((response) => response.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const year = now.getFullYear();
+                const formattedDate = `${day}-${month}-${year}`;
+    
+                // Set the dynamic filename
+                a.download = `ext_sheet_${formattedDate}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            })
+            .catch((error) => console.error("Error downloading Excel:", error));
+    });
 
     document.getElementById("uploadForm")
     .addEventListener("submit", function (event) {
